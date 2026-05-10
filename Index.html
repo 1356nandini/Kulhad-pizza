@@ -1,1 +1,699 @@
-https://claude.ai/api/organizations/b7ced76e-860f-49a9-bdf7-9bfbff96f2a3/conversations/aa09f195-5c76-49ac-8c47-847cc6a93f22/wiggle/download-file?path=/mnt/user-data/outputs/kulhad-pizza-app.html
+DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Kulhad Pizza 🍕</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --orange:#FF5722;--orange2:#FF7043;--green:#4CAF50;--red:#E53935;
+  --bg:#F5F5F5;--white:#fff;--card:#fff;--text:#212121;--muted:#9E9E9E;
+  --border:#EEEEEE;--yellow:#FFC107;
+}
+html,body{height:100%;font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);overflow:hidden}
+
+/* ── PHONE SHELL ── */
+.shell{
+  width:390px;height:844px;margin:20px auto;
+  border-radius:44px;overflow:hidden;position:relative;
+  box-shadow:0 30px 80px rgba(0,0,0,0.25),0 0 0 10px #1a1a1a,0 0 0 11px #333;
+  display:flex;flex-direction:column;background:var(--bg);
+}
+@media(max-width:430px){
+  .shell{width:100vw;height:100dvh;border-radius:0;box-shadow:none;margin:0}
+}
+
+/* ── SCREENS ── */
+.screen{display:none;flex-direction:column;height:100%;overflow:hidden}
+.screen.active{display:flex}
+
+/* ── STATUS BAR ── */
+.statusbar{
+  background:var(--white);padding:14px 20px 8px;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:12px;font-weight:700;flex-shrink:0;
+}
+.sb-right{display:flex;gap:6px;align-items:center;font-size:11px}
+
+/* ── HEADER ── */
+.header{
+  background:var(--white);padding:10px 16px 12px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);flex-shrink:0;
+}
+.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.deliver-row{display:flex;align-items:center;gap:6px}
+.deliver-label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.deliver-addr{font-size:14px;font-weight:800;color:var(--text)}
+.deliver-arrow{font-size:10px;color:var(--orange)}
+.header-icons{display:flex;gap:12px}
+.icon-btn{width:36px;height:36px;border-radius:50%;background:var(--bg);border:none;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;position:relative}
+.notif-dot{position:absolute;top:6px;right:6px;width:8px;height:8px;background:var(--orange);border-radius:50%;border:2px solid var(--white)}
+
+/* ── SEARCH BAR ── */
+.search-bar{
+  display:flex;align-items:center;gap:10px;
+  background:var(--bg);border:1.5px solid var(--border);border-radius:12px;padding:10px 14px;
+}
+.search-bar input{border:none;background:transparent;font-family:'Nunito',sans-serif;font-size:13px;flex:1;outline:none;color:var(--text)}
+.search-bar input::placeholder{color:var(--muted)}
+
+/* ── SCROLLABLE CONTENT ── */
+.content{flex:1;overflow-y:auto;padding-bottom:80px}
+.content::-webkit-scrollbar{display:none}
+
+/* ── BANNER ── */
+.banner{margin:14px;border-radius:18px;overflow:hidden;position:relative;height:140px;background:linear-gradient(135deg,#FF5722,#FF8A65)}
+.banner-inner{padding:20px;height:100%}
+.banner span.b-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.75)}
+.banner h2{font-size:22px;font-weight:900;color:#fff;line-height:1.2;margin:4px 0}
+.banner p{font-size:12px;color:rgba(255,255,255,.85);margin-bottom:12px}
+.banner-btn{display:inline-block;background:#fff;color:var(--orange);font-size:12px;font-weight:800;padding:6px 16px;border-radius:50px;cursor:pointer;font-family:'Nunito',sans-serif;border:none}
+.banner-emoji{position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:72px;opacity:.25}
+.banner-code{position:absolute;right:16px;bottom:16px;background:rgba(0,0,0,.2);border:1px dashed rgba(255,255,255,.4);border-radius:8px;padding:4px 12px;font-size:11px;font-weight:700;color:#fff;letter-spacing:2px}
+
+/* ── CATEGORY CHIPS ── */
+.section-title{font-size:16px;font-weight:800;padding:4px 16px 10px;margin-top:4px}
+.chips{display:flex;gap:10px;overflow-x:auto;padding:0 16px 4px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{
+  flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;
+}
+.chip-circle{
+  width:58px;height:58px;border-radius:18px;background:var(--white);
+  border:2px solid var(--border);display:flex;align-items:center;justify-content:center;
+  font-size:26px;transition:all .2s;
+}
+.chip.active .chip-circle{border-color:var(--orange);background:#FFF3F0}
+.chip-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.3px}
+.chip.active .chip-label{color:var(--orange)}
+
+/* ── DIVIDER ── */
+.divider{height:8px;background:var(--bg);margin:8px 0}
+
+/* ── FOOD CARD (Zomato style) ── */
+.food-list{padding:0 14px;display:flex;flex-direction:column;gap:0}
+.food-card{
+  background:var(--white);border-radius:0;padding:16px 2px;
+  border-bottom:1px solid var(--border);display:flex;gap:14px;align-items:flex-start;
+  transition:background .15s;
+}
+.food-card:first-child{border-radius:16px 16px 0 0}
+.food-card:last-child{border-radius:0 0 16px 16px;border-bottom:none}
+.food-card:only-child{border-radius:16px}
+.food-card-wrap{background:var(--white);border-radius:16px;box-shadow:0 1px 6px rgba(0,0,0,.06);overflow:hidden;margin-bottom:12px}
+
+.food-info{flex:1}
+.veg-icon{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:700;margin-bottom:6px}
+.veg-icon .dot{width:10px;height:10px;border-radius:2px;border-width:1.5px;border-style:solid;display:inline-block}
+.veg-icon.veg .dot{border-color:var(--green);background:var(--green)}
+.veg-icon.nonveg .dot{border-color:var(--red);background:var(--red)}
+.veg-icon.veg{color:var(--green)}
+.veg-icon.nonveg{color:var(--red)}
+.food-name{font-size:15px;font-weight:800;margin-bottom:4px;line-height:1.3}
+.food-desc{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:8px}
+.food-meta{display:flex;align-items:center;gap:8px}
+.rating-badge{display:flex;align-items:center;gap:3px;background:#F1F8E9;color:#388E3C;border-radius:6px;padding:3px 7px;font-size:11px;font-weight:700}
+.food-price{font-size:16px;font-weight:800;color:var(--text)}
+.bestseller{background:#FFF8E1;color:#F9A825;border-radius:6px;padding:3px 8px;font-size:10px;font-weight:700}
+
+.food-right{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:8px}
+.food-img{
+  width:90px;height:80px;border-radius:14px;
+  background:linear-gradient(135deg,#FFE0B2,#FFCCBC);
+  display:flex;align-items:center;justify-content:center;font-size:38px;
+  position:relative;overflow:hidden;flex-shrink:0;
+}
+.food-img .discount{position:absolute;bottom:0;left:0;right:0;background:var(--orange);color:#fff;font-size:9px;font-weight:700;text-align:center;padding:2px}
+
+/* ── ADD BUTTON ── */
+.add-wrap{position:relative;width:90px}
+.add-btn{
+  width:90px;height:32px;border:1.5px solid var(--orange);background:#fff;
+  color:var(--orange);font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;
+  border-radius:8px;cursor:pointer;letter-spacing:.5px;transition:all .15s;
+}
+.add-btn:hover{background:#FFF3F0}
+.qty-ctrl{
+  display:flex;align-items:center;justify-content:space-between;
+  width:90px;height:32px;background:var(--orange);border-radius:8px;overflow:hidden;
+}
+.qty-ctrl button{
+  background:transparent;border:none;color:#fff;
+  width:30px;height:100%;font-size:18px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;
+}
+.qty-ctrl span{color:#fff;font-size:14px;font-weight:800}
+
+/* ── BOTTOM NAV ── */
+.bottom-nav{
+  position:absolute;bottom:0;left:0;right:0;height:72px;
+  background:var(--white);border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-around;padding:0 8px 8px;
+}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;flex:1;padding:8px 4px 0;transition:all .2s}
+.nav-item .nav-icon{font-size:22px;line-height:1}
+.nav-item .nav-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.3px}
+.nav-item.active .nav-label{color:var(--orange)}
+.nav-item.active .nav-icon{transform:scale(1.1)}
+.cart-badge{position:relative}
+.cart-badge .badge{
+  position:absolute;top:-6px;right:-6px;
+  background:var(--orange);color:#fff;border-radius:50%;
+  width:17px;height:17px;font-size:10px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  border:2px solid #fff;
+}
+
+/* ── CART SCREEN ── */
+.cart-header{background:var(--white);padding:16px;border-bottom:1px solid var(--border);flex-shrink:0}
+.cart-header h2{font-size:18px;font-weight:900}
+.cart-header p{font-size:12px;color:var(--muted);margin-top:2px}
+.cart-restaurant{background:#FFF3F0;border-radius:12px;margin:12px 14px;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.rest-icon{font-size:28px}
+.rest-info .name{font-size:14px;font-weight:800}
+.rest-info .loc{font-size:11px;color:var(--muted);margin-top:2px}
+
+.cart-item-row{
+  background:var(--white);margin:0 14px;padding:14px 0;
+  border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;
+}
+.cart-item-row:first-child{border-radius:16px 16px 0 0;padding-top:16px}
+.cart-item-row:last-child{border-radius:0 0 16px 16px;border-bottom:none;padding-bottom:16px}
+.cart-item-wrap{background:var(--white);border-radius:16px;box-shadow:0 1px 6px rgba(0,0,0,.06);overflow:hidden;margin:0 14px 12px}
+.ci-emoji{font-size:28px;width:40px;text-align:center}
+.ci-info{flex:1}
+.ci-name{font-size:13px;font-weight:800}
+.ci-price{font-size:12px;color:var(--orange);font-weight:700;margin-top:2px}
+.ci-qty{display:flex;align-items:center;gap:8px}
+.ci-qty button{width:26px;height:26px;border-radius:6px;background:var(--orange);border:none;color:#fff;font-size:16px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif}
+.ci-qty span{font-size:13px;font-weight:800;min-width:16px;text-align:center}
+
+/* COUPON */
+.coupon-row{margin:0 14px 12px;background:var(--white);border-radius:16px;padding:14px;box-shadow:0 1px 6px rgba(0,0,0,.06);display:flex;align-items:center;gap:10px;cursor:pointer;border:1.5px dashed #FFB74D}
+.coupon-row .icon{font-size:22px}
+.coupon-row .text{flex:1;font-size:13px;font-weight:700;color:var(--orange)}
+.coupon-row .arr{font-size:18px;color:var(--muted)}
+
+/* BILL */
+.bill-box{margin:0 14px 12px;background:var(--white);border-radius:16px;padding:16px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.bill-box h3{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;color:var(--muted)}
+.bill-row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px;color:#555}
+.bill-row.total{font-size:15px;font-weight:900;color:var(--text);border-top:1px solid var(--border);padding-top:10px;margin-top:4px}
+.bill-row.savings{color:var(--green);font-weight:700}
+
+/* ORDER BTN */
+.order-bar{margin:0 14px;background:var(--orange);border-radius:16px;padding:16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:transform .15s}
+.order-bar:active{transform:scale(0.98)}
+.ob-left{color:#fff}
+.ob-count{font-size:11px;opacity:.85;font-weight:600}
+.ob-label{font-size:16px;font-weight:900}
+.ob-price{color:#fff;font-size:16px;font-weight:900}
+
+/* DELIVERY CARD */
+.delivery-card{margin:12px 14px;background:var(--white);border-radius:16px;padding:14px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.dc-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.dc-icon{font-size:20px}
+.dc-text .label{font-size:11px;color:var(--muted);font-weight:600}
+.dc-text .val{font-size:13px;font-weight:700}
+.dc-badge{margin-left:auto;background:#E8F5E9;color:var(--green);font-size:11px;font-weight:700;padding:3px 10px;border-radius:50px}
+
+/* EMPTY CART */
+.empty-cart{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:40px}
+.empty-cart .ec-emoji{font-size:64px}
+.empty-cart h3{font-size:18px;font-weight:800}
+.empty-cart p{font-size:13px;color:var(--muted);text-align:center}
+.ec-btn{background:var(--orange);color:#fff;border:none;border-radius:12px;padding:14px 32px;font-size:14px;font-weight:800;font-family:'Nunito',sans-serif;cursor:pointer;margin-top:8px}
+
+/* SUCCESS */
+.success-screen{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:32px;text-align:center}
+.success-anim{font-size:72px;animation:bounce .5s ease}
+@keyframes bounce{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+.success-screen h2{font-size:22px;font-weight:900}
+.success-screen p{font-size:13px;color:var(--muted);line-height:1.6}
+.track-bar{background:#F5F5F5;border-radius:16px;padding:20px;width:100%;margin-top:8px}
+.track-step{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.track-step:last-child{margin-bottom:0}
+.ts-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.ts-dot.done{background:var(--green)}
+.ts-dot.active{background:var(--orange);animation:pulse 1s infinite}
+.ts-dot.pending{background:#E0E0E0}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.ts-info .ts-label{font-size:13px;font-weight:800}
+.ts-info .ts-time{font-size:11px;color:var(--muted)}
+
+/* TOAST */
+.toast{
+  position:absolute;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:#212121;color:#fff;border-radius:50px;padding:10px 20px;
+  font-size:12px;font-weight:700;white-space:nowrap;opacity:0;
+  transition:all .3s;z-index:99;pointer-events:none;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.fadein{animation:fadeIn .3s ease both}
+</style>
+</head>
+<body>
+<div class="shell" id="app">
+
+  <!-- ══ HOME SCREEN ══ -->
+  <div class="screen active" id="s-home">
+    <!-- Status Bar -->
+    <div class="statusbar">
+      <span>9:41</span>
+      <div class="sb-right">
+        <span>●●●●</span><span>WiFi</span><span>🔋</span>
+      </div>
+    </div>
+    <!-- Header -->
+    <div class="header">
+      <div class="header-top">
+        <div class="deliver-row">
+          <div>
+            <div class="deliver-label">Deliver to 📍</div>
+            <div class="deliver-addr">Mera Ghar, Sector 12 ▾</div>
+          </div>
+        </div>
+        <div class="header-icons">
+          <button class="icon-btn" onclick="showToast('🔔 Koi notification nahi!')">🔔<div class="notif-dot"></div></button>
+          <button class="icon-btn" onclick="showToast('👤 Profile coming soon!')">👤</button>
+        </div>
+      </div>
+      <div class="search-bar">
+        <span>🔍</span>
+        <input type="text" placeholder="Pizza, Burger, Roll dhundho..."/>
+      </div>
+    </div>
+
+    <!-- Scrollable -->
+    <div class="content">
+      <!-- Banner -->
+      <div class="banner" style="margin-top:14px">
+        <div class="banner-inner">
+          <span class="b-tag">🔥 Limited Offer</span>
+          <h2>Pehle Order pe<br>20% OFF!</h2>
+          <p>Sirf aaj ke liye — jaldi karo!</p>
+          <button class="banner-btn" onclick="copyCode()">Code Copy Karo</button>
+        </div>
+        <div class="banner-emoji">🍕</div>
+        <div class="banner-code">KULHAD20</div>
+      </div>
+
+      <!-- Categories -->
+      <div class="section-title">Kya Khana Hai? 😋</div>
+      <div class="chips" id="chips">
+        <div class="chip active" onclick="filterCat('all',this)">
+          <div class="chip-circle">🍽️</div>
+          <div class="chip-label">Sab</div>
+        </div>
+        <div class="chip" onclick="filterCat('pizza',this)">
+          <div class="chip-circle">🍕</div>
+          <div class="chip-label">Pizza</div>
+        </div>
+        <div class="chip" onclick="filterCat('burger',this)">
+          <div class="chip-circle">🍔</div>
+          <div class="chip-label">Burger</div>
+        </div>
+        <div class="chip" onclick="filterCat('roll',this)">
+          <div class="chip-circle">🌯</div>
+          <div class="chip-label">Roll</div>
+        </div>
+        <div class="chip" onclick="filterCat('shake',this)">
+          <div class="chip-circle">🥤</div>
+          <div class="chip-label">Shake</div>
+        </div>
+        <div class="chip" onclick="filterCat('combo',this)">
+          <div class="chip-circle">🎁</div>
+          <div class="chip-label">Combo</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Food List -->
+      <div id="foodList"></div>
+
+    </div><!-- end content -->
+
+    <!-- Bottom Nav -->
+    <div class="bottom-nav">
+      <div class="nav-item active" onclick="goHome()">
+        <div class="nav-icon">🏠</div>
+        <div class="nav-label">Home</div>
+      </div>
+      <div class="nav-item" onclick="showToast('🔍 Search coming soon!')">
+        <div class="nav-icon">🔍</div>
+        <div class="nav-label">Dhundho</div>
+      </div>
+      <div class="nav-item cart-badge" onclick="goCart()">
+        <div class="nav-icon">🛒<span class="badge" id="cartBadge1" style="display:none">0</span></div>
+        <div class="nav-label">Cart</div>
+      </div>
+      <div class="nav-item" onclick="showToast('📦 Orders coming soon!')">
+        <div class="nav-icon">📦</div>
+        <div class="nav-label">Orders</div>
+      </div>
+    </div>
+  </div><!-- end home -->
+
+  <!-- ══ CART SCREEN ══ -->
+  <div class="screen" id="s-cart">
+    <div class="statusbar">
+      <span>9:41</span>
+      <div class="sb-right"><span>●●●●</span><span>WiFi</span><span>🔋</span></div>
+    </div>
+    <div class="cart-header">
+      <div style="display:flex;align-items:center;gap:10px">
+        <button onclick="goHome()" style="background:var(--bg);border:none;border-radius:8px;width:32px;height:32px;font-size:18px;cursor:pointer">←</button>
+        <div>
+          <h2>Tumhara Cart 🛒</h2>
+          <p id="cartSubtitle">0 items</p>
+        </div>
+      </div>
+    </div>
+    <div class="content" id="cartContent"></div>
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="goHome()">
+        <div class="nav-icon">🏠</div><div class="nav-label">Home</div>
+      </div>
+      <div class="nav-item" onclick="showToast('🔍 Search!')">
+        <div class="nav-icon">🔍</div><div class="nav-label">Dhundho</div>
+      </div>
+      <div class="nav-item active cart-badge" onclick="goCart()">
+        <div class="nav-icon">🛒<span class="badge" id="cartBadge2" style="display:none">0</span></div>
+        <div class="nav-label">Cart</div>
+      </div>
+      <div class="nav-item" onclick="showToast('📦 Orders!')">
+        <div class="nav-icon">📦</div><div class="nav-label">Orders</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SUCCESS SCREEN ══ -->
+  <div class="screen" id="s-success">
+    <div class="statusbar">
+      <span>9:41</span>
+      <div class="sb-right"><span>●●●●</span><span>WiFi</span><span>🔋</span></div>
+    </div>
+    <div class="success-screen">
+      <div class="success-anim">🎉</div>
+      <h2>Order Place Ho Gaya!</h2>
+      <p>Tumhara khana tayar ho raha hai.<br>Garam garam milega — pakka!</p>
+      <div class="track-bar">
+        <div class="track-step">
+          <div class="ts-dot done">✓</div>
+          <div class="ts-info"><div class="ts-label">Order Confirm</div><div class="ts-time">Abhi abhi</div></div>
+        </div>
+        <div class="track-step">
+          <div class="ts-dot active">👨‍🍳</div>
+          <div class="ts-info"><div class="ts-label">Khana Ban Raha Hai</div><div class="ts-time">~15 min</div></div>
+        </div>
+        <div class="track-step">
+          <div class="ts-dot pending">🛵</div>
+          <div class="ts-info"><div class="ts-label">Delivery Boy Nikla</div><div class="ts-time">~25 min</div></div>
+        </div>
+        <div class="track-step">
+          <div class="ts-dot pending">🏠</div>
+          <div class="ts-info"><div class="ts-label">Deliver Ho Gaya</div><div class="ts-time">~35 min</div></div>
+        </div>
+      </div>
+      <button class="ec-btn" onclick="goHome()">Wapas Jao 🏠</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+</div>
+
+<script>
+const menu = [
+  // PIZZA
+  {id:'p1',cat:'pizza',name:'Kulhad Special Pizza',desc:'Hamare secret sauce ke saath, cheese burst, paneer, shimla mirch',price:299,mrp:399,emoji:'🍕',veg:true,best:true,rating:4.8,reviews:320,disc:'25% OFF'},
+  {id:'p2',cat:'pizza',name:'Margherita Classic',desc:'San Marzano tomato, mozzarella, fresh basil',price:179,mrp:229,emoji:'🍕',veg:true,best:false,rating:4.6,reviews:210,disc:''},
+  {id:'p3',cat:'pizza',name:'Paneer Tikka Pizza',desc:'Tandoori paneer, capsicum, onion, mint chutney base',price:249,mrp:299,emoji:'🍕',veg:true,best:true,rating:4.7,reviews:198,disc:''},
+  {id:'p4',cat:'pizza',name:'Pepperoni Fire Pizza',desc:'Double pepperoni, jalapeño, honey drizzle, smoked cheese',price:279,mrp:349,emoji:'🍕',veg:false,best:true,rating:4.9,reviews:412,disc:'20% OFF'},
+  {id:'p5',cat:'pizza',name:'BBQ Chicken Pizza',desc:'Smoky BBQ sauce, grilled chicken, red onion',price:269,mrp:329,emoji:'🍕',veg:false,best:false,rating:4.7,reviews:156,disc:''},
+  // BURGER
+  {id:'b1',cat:'burger',name:'Smash Burger',desc:'Double smash patty, American cheese, pickles, special sauce',price:149,mrp:189,emoji:'🍔',veg:false,best:true,rating:4.8,reviews:289,disc:''},
+  {id:'b2',cat:'burger',name:'Crispy Chicken Burger',desc:'Fried chicken thigh, coleslaw, chipotle mayo, brioche bun',price:159,mrp:199,emoji:'🍔',veg:false,best:false,rating:4.7,reviews:178,disc:''},
+  {id:'b3',cat:'burger',name:'Paneer Tikka Burger',desc:'Grilled paneer, mint chutney, pickled onion, toasted bun',price:129,mrp:169,emoji:'🍔',veg:true,best:false,rating:4.6,reviews:145,disc:''},
+  {id:'b4',cat:'burger',name:'Aloo Tikki Burger',desc:'Crispy tikki, green chutney, imli sauce, lettuce',price:89,mrp:119,emoji:'🍔',veg:true,best:false,rating:4.4,reviews:220,disc:''},
+  // ROLL
+  {id:'r1',cat:'roll',name:'Chicken Kathi Roll',desc:'Spiced chicken tikka, egg, onion, green chutney, lachha paratha',price:119,mrp:149,emoji:'🌯',veg:false,best:true,rating:4.8,reviews:340,disc:''},
+  {id:'r2',cat:'roll',name:'Paneer Bhurji Roll',desc:'Scrambled paneer, capsicum, spices, mint chutney',price:109,mrp:139,emoji:'🌯',veg:true,best:false,rating:4.6,reviews:190,disc:''},
+  {id:'r3',cat:'roll',name:'Egg Double Roll',desc:'Double egg omelette, cheese, onion, spicy sauce',price:99,mrp:129,emoji:'🌯',veg:false,best:false,rating:4.5,reviews:120,disc:''},
+  // SHAKE
+  {id:'s1',cat:'shake',name:'Chocolate Overload Shake',desc:'Belgian chocolate, ice cream, whipped cream',price:129,mrp:159,emoji:'🍫',veg:true,best:true,rating:4.9,reviews:430,disc:''},
+  {id:'s2',cat:'shake',name:'Oreo Shake',desc:'Crushed Oreos, cream, milk, chocolate drizzle',price:139,mrp:169,emoji:'🍪',veg:true,best:true,rating:4.8,reviews:380,disc:''},
+  {id:'s3',cat:'shake',name:'Strawberry Dream',desc:'Fresh strawberries, vanilla ice cream, milk',price:129,mrp:159,emoji:'🍓',veg:true,best:false,rating:4.7,reviews:210,disc:''},
+  {id:'s4',cat:'shake',name:'Mango Madness',desc:'Alphonso mango pulp, ice cream, chilli twist',price:139,mrp:169,emoji:'🥭',veg:true,best:false,rating:4.8,reviews:260,disc:''},
+  {id:'s5',cat:'shake',name:'Lotus Biscoff Shake',desc:'Biscoff spread, caramel ice cream, cookie crumble',price:149,mrp:189,emoji:'🍂',veg:true,best:true,rating:4.9,reviews:310,disc:''},
+  // COMBO
+  {id:'c1',cat:'combo',name:'Pizza + Shake Combo',desc:'Koi bhi medium pizza + koi bhi classic shake',price:349,mrp:459,emoji:'🎁',veg:true,best:true,rating:4.9,reviews:520,disc:'24% OFF'},
+  {id:'c2',cat:'combo',name:'Burger + Fries + Drink',desc:'Koi bhi burger + loaded fries + cold drink',price:229,mrp:309,emoji:'🎁',veg:false,best:false,rating:4.7,reviews:290,disc:'26% OFF'},
+  {id:'c3',cat:'combo',name:'Family Pizza Combo',desc:'2 large pizzas + 2 shakes + garlic bread — 4 logon ke liye!',price:699,mrp:999,emoji:'🎁',veg:true,best:true,rating:5.0,reviews:180,disc:'30% OFF'},
+];
+
+let cart = {}; // {id: qty}
+let currentFilter = 'all';
+
+// ── RENDER FOOD LIST ──
+function renderFood(){
+  const list = document.getElementById('foodList');
+  const filtered = currentFilter==='all' ? menu : menu.filter(m=>m.cat===currentFilter);
+
+  // Group by category
+  const cats = {pizza:'🍕 Pizzas',burger:'🍔 Burgers',roll:'🌯 Rolls',shake:'🥤 Shakes',combo:'🎁 Combos'};
+  const groups = {};
+  filtered.forEach(item=>{
+    if(!groups[item.cat]) groups[item.cat]=[];
+    groups[item.cat].push(item);
+  });
+
+  let html='';
+  for(const [cat, items] of Object.entries(groups)){
+    if(currentFilter==='all') html+=`<div class="section-title fadein">${cats[cat]}</div>`;
+    html+=`<div class="food-card-wrap fadein">`;
+    items.forEach(item=>{
+      const qty = cart[item.id]||0;
+      html+=`
+      <div class="food-card" id="fc-${item.id}">
+        <div class="food-info">
+          <div class="veg-icon ${item.veg?'veg':'nonveg'}">
+            <span class="dot"></span>${item.veg?'Veg':'Non-Veg'}
+          </div>
+          ${item.best?`<span class="bestseller">🏆 Bestseller</span>`:''}
+          <div class="food-name">${item.name}</div>
+          <div class="food-desc">${item.desc}</div>
+          <div class="food-meta">
+            <div class="rating-badge">★ ${item.rating} <span style="font-size:10px;font-weight:400;color:#666">(${item.reviews})</span></div>
+          </div>
+          <div style="margin-top:8px">
+            <span class="food-price">₹${item.price}</span>
+            ${item.mrp>item.price?`<span style="font-size:11px;color:var(--muted);text-decoration:line-through;margin-left:4px">₹${item.mrp}</span>`:''}
+          </div>
+        </div>
+        <div class="food-right">
+          <div class="food-img">
+            ${item.emoji}
+            ${item.disc?`<div class="discount">${item.disc}</div>`:''}
+          </div>
+          <div class="add-wrap">
+            ${qty===0
+              ? `<button class="add-btn" onclick="addItem('${item.id}')">ADD +</button>`
+              : `<div class="qty-ctrl">
+                  <button onclick="dec('${item.id}')">−</button>
+                  <span>${qty}</span>
+                  <button onclick="inc('${item.id}')">+</button>
+                </div>`
+            }
+          </div>
+        </div>
+      </div>`;
+    });
+    html+=`</div>`;
+  }
+  list.innerHTML = html;
+}
+
+function addItem(id){
+  cart[id]=(cart[id]||0)+1;
+  updateBadge();
+  renderFood();
+  const item = menu.find(m=>m.id===id);
+  showToast(`${item.emoji} Cart mein add ho gaya!`);
+}
+function inc(id){ cart[id]=(cart[id]||0)+1; updateBadge(); renderFood(); }
+function dec(id){
+  if(!cart[id]) return;
+  cart[id]--;
+  if(cart[id]===0) delete cart[id];
+  updateBadge(); renderFood();
+}
+
+function updateBadge(){
+  const total = Object.values(cart).reduce((a,b)=>a+b,0);
+  ['cartBadge1','cartBadge2'].forEach(id=>{
+    const el=document.getElementById(id);
+    el.textContent=total;
+    el.style.display=total>0?'flex':'none';
+  });
+}
+
+function filterCat(cat,el){
+  currentFilter=cat;
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+  if(el) el.classList.add('active');
+  renderFood();
+}
+
+// ── CART SCREEN ──
+function goCart(){
+  showScreen('s-cart');
+  renderCart();
+}
+function goHome(){ showScreen('s-home'); renderFood(); }
+
+function renderCart(){
+  const cartItems = Object.entries(cart);
+  const content = document.getElementById('cartContent');
+  const subtitle = document.getElementById('cartSubtitle');
+  const totalItems = cartItems.reduce((a,[,q])=>a+q,0);
+  subtitle.textContent = `${totalItems} items • Kulhad Pizza Cafe`;
+
+  if(cartItems.length===0){
+    content.innerHTML=`
+    <div class="empty-cart">
+      <div class="ec-emoji">🛒</div>
+      <h3>Cart Khali Hai!</h3>
+      <p>Kuch delicious choose karo aur cart mein daalo 😋</p>
+      <button class="ec-btn" onclick="goHome()">Menu Dekho 🍕</button>
+    </div>`;
+    return;
+  }
+
+  let subtotal=0;
+  let savings=0;
+  cartItems.forEach(([id,qty])=>{
+    const item=menu.find(m=>m.id===id);
+    subtotal+=item.price*qty;
+    savings+=(item.mrp-item.price)*qty;
+  });
+  const delivery=30;
+  const tax=Math.round(subtotal*0.05);
+  const total=subtotal+delivery+tax;
+
+  let html=`
+  <div class="cart-restaurant">
+    <div class="rest-icon">🏪</div>
+    <div class="rest-info">
+      <div class="name">Kulhad Pizza Cafe</div>
+      <div class="loc">📍 Tumhare paas hi hai</div>
+    </div>
+  </div>
+  <div class="cart-item-wrap">`;
+
+  cartItems.forEach(([id,qty])=>{
+    const item=menu.find(m=>m.id===id);
+    html+=`
+    <div class="cart-item-row">
+      <div class="ci-emoji">${item.emoji}</div>
+      <div class="ci-info">
+        <div class="ci-name">${item.name}</div>
+        <div class="ci-price">₹${item.price} × ${qty} = ₹${item.price*qty}</div>
+      </div>
+      <div class="ci-qty">
+        <button onclick="decCart('${id}')">−</button>
+        <span>${qty}</span>
+        <button onclick="incCart('${id}')">+</button>
+      </div>
+    </div>`;
+  });
+  html+=`</div>`;
+
+  html+=`
+  <div class="coupon-row" onclick="showToast('🎁 KULHAD20 apply karo — 20% OFF pao!')">
+    <div class="icon">🏷️</div>
+    <div class="text">Coupon lagao — KULHAD20</div>
+    <div class="arr">›</div>
+  </div>
+
+  <div class="delivery-card">
+    <div class="dc-row">
+      <div class="dc-icon">🛵</div>
+      <div class="dc-text">
+        <div class="label">Delivery Time</div>
+        <div class="val">25–35 min</div>
+      </div>
+      <div class="dc-badge">Fast</div>
+    </div>
+    <div style="height:1px;background:var(--border);margin:8px 0"></div>
+    <div class="dc-row" style="margin-bottom:0">
+      <div class="dc-icon">📍</div>
+      <div class="dc-text">
+        <div class="label">Deliver to</div>
+        <div class="val">Mera Ghar, Sector 12</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bill-box">
+    <h3>Bill Details</h3>
+    <div class="bill-row"><span>Item Total</span><span>₹${subtotal}</span></div>
+    <div class="bill-row savings"><span>🎉 Tumhari Bachat</span><span>-₹${savings}</span></div>
+    <div class="bill-row"><span>Delivery Charge</span><span>₹${delivery}</span></div>
+    <div class="bill-row"><span>GST (5%)</span><span>₹${tax}</span></div>
+    <div class="bill-row total"><span>Total Amount</span><span>₹${total}</span></div>
+  </div>
+
+  <div class="order-bar" onclick="placeOrder()">
+    <div class="ob-left">
+      <div class="ob-count">${totalItems} items</div>
+      <div class="ob-label">Order Karo 🚀</div>
+    </div>
+    <div class="ob-price">₹${total} ›</div>
+  </div>
+  <div style="height:16px"></div>`;
+
+  content.innerHTML=html;
+}
+
+function incCart(id){ cart[id]=(cart[id]||0)+1; updateBadge(); renderCart(); }
+function decCart(id){
+  if(!cart[id]) return;
+  cart[id]--;
+  if(cart[id]===0) delete cart[id];
+  updateBadge(); renderCart();
+}
+
+function placeOrder(){
+  cart={};
+  updateBadge();
+  showScreen('s-success');
+}
+
+// ── UTILITIES ──
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+let toastTimer;
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+function copyCode(){
+  navigator.clipboard?.writeText('KULHAD20').catch(()=>{});
+  showToast('✅ KULHAD20 copy ho gaya!');
+}
+
+// ── INIT ──
+renderFood();
+</script>
+</body>
+</html>
